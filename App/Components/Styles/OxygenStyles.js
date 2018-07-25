@@ -4,27 +4,24 @@ import { Colors, Fonts, Metrics } from '../../Themes';
 
 export default StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   imageContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    marginRight: Metrics.smallMargin
   },
   image: {
     width: Metrics.images.medium,
     height: Metrics.images.medium
   },
   percentageContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
+    marginLeft: Metrics.smallMargin
   },
   percentage: {
-    ...Fonts.style.numeric,
-    fontSize: Fonts.size.h4,
-    color: Colors.white,
-    marginRight: Metrics.baseMargin
+    fontFamily: Fonts.type.iceland,
+    fontSize: Fonts.size.h3,
+    color: Colors.white
   }
 });

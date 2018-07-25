@@ -1,6 +1,7 @@
 import { createStackNavigator } from 'react-navigation';
 
 import HomeScreen from '../Containers/HomeScreen';
+import AboutScreen from '../Containers/AboutScreen';
 
 const PrimaryNavigation = createStackNavigator(
   {
@@ -8,6 +9,12 @@ const PrimaryNavigation = createStackNavigator(
       screen: HomeScreen,
       navigationOptions: {
         header: null
+      }
+    },
+    AboutScreen: {
+      screen: AboutScreen,
+      navigationOptions: {
+        title: 'About'
       }
     }
   },

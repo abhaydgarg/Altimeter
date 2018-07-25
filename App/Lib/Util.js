@@ -23,13 +23,30 @@ export default class Util {
     }
   }
 
+  static getMiddleValue (numOne, numTwo) {
+    return (numOne + numTwo) / 2;
+  }
+
   static getAltitudeData (altitude) {
-    for (let node of altitudes) {
-      if (node.altitude >= altitude) {
-        return node;
+    let total = altitudes.length;
+    if (altitude <= 0) {
+      return altitudes[0];
+    }
+    if (altitude >= 8839) {
+      return altitudes[total - 1];
+    }
+    let next = 0;
+    for (let count = 0; count < total; count++) {
+      next = count + 1;
+      if (altitude > altitudes[count].altitude && altitude < altitudes[next].altitude) {
+        let middleValue = Util.getMiddleValue(altitudes[count].altitude, altitudes[next].altitude);
+        if (altitude <= middleValue) {
+          return altitudes[count];
+        } else {
+          return altitudes[next];
+        }
       }
     }
     return {};
   }
-
 }

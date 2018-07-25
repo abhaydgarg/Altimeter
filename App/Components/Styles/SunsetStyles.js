@@ -2,36 +2,30 @@ import { StyleSheet } from 'react-native';
 
 import { Colors, Fonts, Metrics } from '../../Themes';
 
+const layout = false;
+
 export default StyleSheet.create({
   container: {
-    flex: 1
-  },
-  header: {},
-  title: {
-    ...Fonts.style.normal,
-    fontSize: Fonts.size.small,
-    color: Colors.gray
-  },
-  body: {
-    flex: 1
-  },
-  imageContainer: {
     flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  imageContainer: {
+    backgroundColor: layout ? Colors.layout.one : Colors.transparent,
+    marginRight: Metrics.smallMargin
   },
   image: {
     width: Metrics.images.medium,
     height: Metrics.images.medium
   },
   timeContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: layout ? Colors.layout.two : Colors.transparent,
+    marginLeft: Metrics.smallMargin
   },
   time: {
-    ...Fonts.style.numeric,
-    fontSize: Fonts.size.h4,
+    fontFamily: Fonts.type.iceland,
+    fontSize: Fonts.size.h3,
     color: Colors.white
   }
 });

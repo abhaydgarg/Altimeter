@@ -1,10 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
 
+import { Metrics } from '../../Themes';
 import Util from '../../Lib/Util';
 import Oxygen from '../Oxygen';
 
-const data = Util.getAltitudeData(306);
+const data = Util.getAltitudeData(884);
 
 const OxygenStory = () => {
   return (
@@ -21,6 +22,7 @@ export default OxygenStory;
 const styles = {
   container: {
     height: 100,
+    width: Metrics.screenWidth * 2 / 3,
     backgroundColor: '#000000'
   }
 };

@@ -2,25 +2,28 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { Metrics } from '../../Themes';
-import Sunrise from '../Sunrise';
+import ShareButton from '../ShareButton';
 
-const SunriseStory = () => {
+function onPress () {
+  alert('Share');
+}
+
+const ShareButtonStory = () => {
   return (
     <View style={styles.container}>
-      <Sunrise
-        time={'06:30'}
-        calculating={false}
+      <ShareButton
+        handleShare={onPress}
       />
     </View>
   );
 };
 
-export default SunriseStory;
+export default ShareButtonStory;
 
 const styles = {
   container: {
     height: 100,
-    width: Metrics.screenWidth / 2,
+    width: Metrics.screenWidth * 1 / 3,
     backgroundColor: '#000000'
   }
 };

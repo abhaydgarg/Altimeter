@@ -15,7 +15,8 @@
     "android:test": "react-native run-android --variant=release",
     "android:build": "cd android && ./gradlew assembleRelease",
     "ios:test": "react-native run-ios --simulator=\"iPhone X\" --configuration Release",
-    "storybook": "storybook start -p 7007"
+    "storybook": "storybook start -p 7007",
+    "storybook:android:connect": "adb reverse tcp:7007 tcp:7007"
   },
   "dependencies": {
     "@abhaydgarg/is": "^1.0.0",
@@ -26,6 +27,7 @@
     "react-native-device-info": "^0.21.5",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-permissions": "^1.1.1",
+    "react-native-pull-to-refresh": "^2.1.3",
     "react-native-shake-event": "^4.0.1",
     "react-native-status-bar-height": "^2.0.0",
     "react-native-vector-icons": "^4.6.0",

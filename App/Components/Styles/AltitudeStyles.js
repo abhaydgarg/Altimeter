@@ -8,24 +8,21 @@ export default StyleSheet.create({
   },
   body: {
     flex: 1,
-    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   },
   altitude: {
-    ...Fonts.style.numericBold,
+    fontFamily: Fonts.type.iceberg,
     fontSize: Fonts.size.h1,
-    color: Colors.white,
-    marginRight: Metrics.smallMargin
+    color: Colors.white
   },
   altitudeUnit: {
-    ...Fonts.style.normal,
-    fontSize: Fonts.size.medium,
+    fontFamily: Fonts.type.iceberg,
+    fontSize: Fonts.size.regular,
     color: Colors.gray
   },
   footer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'flex-end'
   },
   accuracyContainer: {
@@ -33,14 +30,14 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   accuracyText: {
-    ...Fonts.style.normal,
-    fontSize: Fonts.size.small,
+    fontFamily: Fonts.type.iceberg,
+    fontSize: Fonts.size.regular,
     color: Colors.white,
-    marginRight: Metrics.smallMargin
+    marginRight: Metrics.smallMargin - 2
   },
   accuracy: {
-    ...Fonts.style.numeric,
-    fontSize: Fonts.size.small,
+    fontFamily: Fonts.type.iceberg,
+    fontSize: Fonts.size.regular,
     color: Colors.white,
     marginTop: 2
   },
@@ -50,17 +47,19 @@ export default StyleSheet.create({
     justifyContent: 'flex-end'
   },
   feet: {
-    ...Fonts.style.numeric,
-    color: Colors.white
+    fontFamily: Fonts.type.iceberg,
+    fontSize: Fonts.size.regular,
+    color: Colors.white,
+    marginRight: Metrics.smallMargin - 2
   },
   feetUnit: {
-    ...Fonts.style.normal,
-    fontWeight: 'bold',
+    fontFamily: Fonts.type.iceberg,
+    fontSize: Fonts.size.regular,
     color: Colors.gray
   },
   level: {
-    ...Fonts.style.normal,
-    fontSize: Fonts.size.small,
+    fontFamily: Fonts.type.iceberg,
+    fontSize: Fonts.size.regular,
     color: Colors.black,
     backgroundColor: Colors.white,
     padding: 2,

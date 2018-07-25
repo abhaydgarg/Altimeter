@@ -10,6 +10,9 @@ import SunriseStory from './Sunrise.story';
 import SunsetStory from './Sunset.story';
 import CoordinatesStory from './Coordinates.story';
 import OxygenStory from './Oxygen.story';
+import ShareButtonStory from './ShareButton.story';
+import LocationPermissionStory from './LocationPermission.story';
+import AboutStory from './About.story';
 
 storiesOf('Components', module)
   .add('Welcome', () =>
@@ -39,6 +42,17 @@ storiesOf('Components', module)
     <View style={styles.container}>
       <OxygenStory />
     </View>
+  )
+  .add('Share Button', () =>
+    <View style={styles.container}>
+      <ShareButtonStory />
+    </View>
+  )
+  .add('Location Permission', () =>
+    <LocationPermissionStory />
+  )
+  .add('About', () =>
+    <AboutStory />
   );
 
 const styles = {

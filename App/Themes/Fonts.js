@@ -1,11 +1,14 @@
 import normalize from '../Lib/normalizeText';
 
 const type = {
-  base: 'Merriweather-Regular',
-  bold: 'Merriweather-Bold',
-  emphasis: 'Merriweather-Italic',
-  numeric: 'StardosStencil-Regular',
-  numericBold: 'StardosStencil-Bold'
+  audiowide: 'Audiowide-Regular',
+  iceberg: 'Iceberg-Regular',
+  iceland: 'Iceland-Regular',
+  thin: 'Roboto-Thin',
+  light: 'Roboto-Light',
+  regular: 'Roboto-Regular',
+  medium: 'Roboto-Medium',
+  bold: 'Roboto-Bold'
 };
 
 const size = {
@@ -19,54 +22,16 @@ const size = {
   regular: normalize(17),
   medium: normalize(14),
   small: normalize(12),
+  xsmall: normalize(10),
   tiny: normalize(8.5)
 };
 
-const style = {
-  h1: {
-    fontFamily: type.base,
-    fontSize: size.h1
-  },
-  h2: {
-    fontFamily: type.base,
-    fontSize: size.h2
-  },
-  h3: {
-    fontFamily: type.base,
-    fontSize: size.h3
-  },
-  h4: {
-    fontFamily: type.base,
-    fontSize: size.h4
-  },
-  h5: {
-    fontFamily: type.base,
-    fontSize: size.h5
-  },
-  h6: {
-    fontFamily: type.base,
-    fontSize: size.h6
-  },
-  normal: {
-    fontFamily: type.base,
-    fontSize: size.regular
-  },
-  description: {
-    fontFamily: type.base,
-    fontSize: size.medium
-  },
-  numeric: {
-    fontFamily: type.numeric,
-    fontSize: size.regular
-  },
-  numericBold: {
-    fontFamily: type.numericBold,
-    fontSize: size.regular
-  }
-};
+function normalizeText (size) {
+  return normalize(size);
+}
 
 export default {
   type,
   size,
-  style
+  normalizeText
 };

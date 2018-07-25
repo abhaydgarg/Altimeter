@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { isEmpty } from '@abhaydgarg/is';
 
@@ -33,7 +33,7 @@ export default class Sunset extends Component {
 
   animation = () => {
     if (this.props.calculating === true) {
-      return 'rotate';
+      return 'swing';
     }
     return 'fadeIn';
   }
@@ -44,30 +44,25 @@ export default class Sunset extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Sunset</Text>
+        <View style={styles.imageContainer}>
+          <Animatable.Image
+            useNativeDriver
+            easing='ease-in-out'
+            animation={this.animation()}
+            iterationCount={this.iterationCount()}
+            style={styles.image}
+            resizeMode='contain'
+            source={Images.sunset}
+          />
         </View>
-        <View style={styles.body}>
-          <View style={styles.imageContainer}>
-            <Animatable.Image
-              useNativeDriver
-              easing='ease-in-out'
-              animation={this.animation()}
-              iterationCount={this.iterationCount()}
-              style={styles.image}
-              resizeMode='contain'
-              source={Images.sunset}
-            />
-          </View>
-          <View style={styles.timeContainer}>
-            <Animatable.Text
-              easing='ease-in-out'
-              animation='fadeIn'
-              style={styles.time}
-            >
-              {time}
-            </Animatable.Text>
-          </View>
+        <View style={styles.timeContainer}>
+          <Animatable.Text
+            easing='ease-in-out'
+            animation='fadeIn'
+            style={styles.time}
+          >
+            {time}
+          </Animatable.Text>
         </View>
       </View>
     );

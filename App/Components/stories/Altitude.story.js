@@ -22,7 +22,7 @@ export default AltitudeStory;
 
 const styles = {
   container: {
-    height: 200,
+    height: 150,
     backgroundColor: '#000000'
   }
 };

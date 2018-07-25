@@ -2,56 +2,54 @@ import { StyleSheet } from 'react-native';
 
 import { Colors, Fonts, Metrics } from '../../Themes';
 
+const layout = false;
+
 export default StyleSheet.create({
   container: {
-    flex: 1
-  },
-  header: {},
-  title: {
-    ...Fonts.style.normal,
-    fontSize: Fonts.size.small,
-    color: Colors.gray
-  },
-  body: {
-    flex: 1
-  },
-  iconContainer: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center'
   },
+  iconContainer: {
+    backgroundColor: layout ? Colors.layout.one : Colors.transparent,
+    flex: 1,
+    justifyContent: 'center'
+  },
   icon: {
-    fontSize: Fonts.size.h5,
+    fontSize: Fonts.size.h3,
     color: Colors.white
   },
   latLonContainer: {
+    backgroundColor: layout ? Colors.layout.two : Colors.transparent,
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center'
   },
   separator: {
-    ...Fonts.style.normal,
-    fontWeight: 'bold',
+    fontFamily: Fonts.type.iceberg,
+    fontSize: Fonts.size.regular,
     color: Colors.white,
     marginHorizontal: Metrics.smallMargin
   },
   lat: {
-    ...Fonts.style.numeric,
+    fontFamily: Fonts.type.iceberg,
+    fontSize: Fonts.size.regular,
     color: Colors.white
   },
   lon: {
-    ...Fonts.style.numeric,
+    fontFamily: Fonts.type.iceberg,
+    fontSize: Fonts.size.regular,
     color: Colors.white
   },
   locationContainer: {
+    backgroundColor: layout ? Colors.layout.three : Colors.transparent,
     flex: 2,
     justifyContent: 'center',
     alignItems: 'center'
   },
   location: {
-    ...Fonts.style.normal,
-    fontSize: Fonts.size.small,
-    color: Colors.white
+    fontFamily: Fonts.type.regular,
+    fontSize: Fonts.size.medium,
+    color: Colors.white,
+    textAlign: 'center'
   }
 });

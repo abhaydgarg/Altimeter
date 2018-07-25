@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
-import { View, ActivityIndicator } from 'react-native'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import { View, ActivityIndicator } from 'react-native';
+import PropTypes from 'prop-types';
 
-import withRemote from '../../Lib/RemoteHOC'
-import { Colors } from '../../Themes'
-import styles from './Styles/ScreenActivityIndicatorStyles'
+import { Colors } from '../../Themes';
+import styles from './Styles/ScreenActivityIndicatorStyles';
 
 class ScreenActivityIndicator extends Component {
   static propTypes = {
@@ -14,11 +13,11 @@ class ScreenActivityIndicator extends Component {
 
   static defaultProps = {
     size: 'large',
-    color: Colors.black
+    color: Colors.white
   }
 
   render () {
-    let { size, color } = this.props
+    let { size, color } = this.props;
     return (
       <View style={styles.container}>
         <ActivityIndicator
@@ -26,8 +25,8 @@ class ScreenActivityIndicator extends Component {
           color={color}
         />
       </View>
-    )
+    );
   }
 }
 
-export default withRemote(ScreenActivityIndicator, 'ScreenActivityIndicator')
+export default ScreenActivityIndicator;

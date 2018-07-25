@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import PropTypes from 'prop-types'
-import * as Animatable from 'react-native-animatable'
+import React, { Component } from 'react';
+import { View } from 'react-native';
+import PropTypes from 'prop-types';
+import * as Animatable from 'react-native-animatable';
 
-import withRemote from '../../Lib/RemoteHOC'
-import styles from './Styles/ScreenMessageStyles'
+import styles from './Styles/ScreenMessageStyles';
 
 class ScreenMessage extends Component {
   static propTypes = {
@@ -12,7 +11,7 @@ class ScreenMessage extends Component {
   }
 
   render () {
-    let { children } = this.props
+    let { children } = this.props;
     return (
       <View style={styles.container}>
         <Animatable.View
@@ -23,8 +22,8 @@ class ScreenMessage extends Component {
           {children}
         </Animatable.View>
       </View>
-    )
+    );
   }
 }
 
-export default withRemote(ScreenMessage, 'ScreenMessage')
+export default ScreenMessage;
