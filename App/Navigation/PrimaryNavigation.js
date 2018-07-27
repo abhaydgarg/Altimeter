@@ -1,5 +1,6 @@
 import { createStackNavigator } from 'react-navigation';
 
+import { Fonts } from '../Themes';
 import HomeScreen from '../Containers/HomeScreen';
 import AboutScreen from '../Containers/AboutScreen';
 
@@ -14,7 +15,8 @@ const PrimaryNavigation = createStackNavigator(
     AboutScreen: {
       screen: AboutScreen,
       navigationOptions: {
-        title: 'About'
+        title: 'About',
+        headerTitleStyle: { fontFamily: Fonts.type.regular }
       }
     }
   },

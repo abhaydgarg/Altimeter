@@ -32,6 +32,6 @@ export default StyleSheet.create({
   },
   icon: {
     fontSize: Fonts.size.h3,
-    color: Colors.black
+    color: Colors.secondary
   }
 });

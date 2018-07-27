@@ -20,7 +20,7 @@ export default CoordinatesStory;
 
 const styles = {
   container: {
-    height: 100,
+    height: 150,
     backgroundColor: '#000000'
   }
 };

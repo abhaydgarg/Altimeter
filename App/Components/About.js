@@ -22,7 +22,7 @@ export default class About extends Component {
             <Text style={styles.build}>-{DeviceInfo.getBuildNumber()}</Text>
           </View>
           <View>
-            {(__DEV__) ? <Text style={styles.dev}>DEV ENV ({DeviceInfo.getBundleId()})</Text> : null}
+            {(__DEV__) ? <Text style={styles.dev}>{DeviceInfo.getBundleId()}</Text> : null}
           </View>
         </View>
       </ScreenMessage>

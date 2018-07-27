@@ -33,7 +33,7 @@ export default StyleSheet.create({
   },
   dev: {
     fontFamily: Fonts.type.bold,
-    fontSize: Fonts.size.regular,
+    fontSize: Fonts.size.medium,
     color: Colors.info
   }
 });

@@ -1,10 +1,26 @@
+import DeviceInfo from 'react-native-device-info';
+import SunCalc from 'suncalc';
+
+import Config from '../Config';
 import altitudes from '../Data/altitudes';
 
 export default class Util {
   // empty function
   static emptyFunc = () => { }
 
-  static getAltitudeLevelColor (level) {
+  static isSimulator () {
+    return DeviceInfo.isEmulator();
+  }
+
+  static getMiddleValue (numOne, numTwo) {
+    return (numOne + numTwo) / 2;
+  }
+
+  static formatTime (date) {
+    return `${date.getHours()}:${date.getMinutes()}`;
+  }
+
+  static getAltitudeLevelColorIdentifier (level) {
     switch (level) {
       case 'Low':
         return 'low';
@@ -21,10 +37,6 @@ export default class Util {
       default:
         return null;
     }
-  }
-
-  static getMiddleValue (numOne, numTwo) {
-    return (numOne + numTwo) / 2;
   }
 
   static getAltitudeData (altitude) {
@@ -48,5 +60,21 @@ export default class Util {
       }
     }
     return {};
+  }
+
+  static getLocation (cb) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      cb(null, position);
+    }, function (error) {
+      cb(error);
+    }, Config.locationOptions);
+  }
+
+  static getSunriseSunset (lat, lon) {
+    let times = SunCalc.getTimes(new Date(), lat, lon);
+    return {
+      sunrise: times.sunrise,
+      sunset: times.sunset
+    };
   }
 }

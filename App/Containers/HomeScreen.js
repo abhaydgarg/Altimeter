@@ -5,8 +5,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import RNShakeEvent from 'react-native-shake-event';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import styles from './Styles/HomeScreenStyles';
+import Util from '../Lib/Util';
 import { Colors } from '../Themes';
+import styles from './Styles/HomeScreenStyles';
 import ScreenActivityIndicator from '../Components/Global/ScreenActivityIndicator';
 import LocationPermission from '../Components/LocationPermission';
 import Altitude from '../Components/Altitude';
@@ -25,7 +26,15 @@ export default class HomeScreen extends Component {
     super(props);
     StatusBar.setBarStyle('light-content', true);
     this.state = {
-
+      altitude: 0,
+      accuracy: 0,
+      level: '',
+      lat: 0,
+      lon: 0,
+      location: 'Unknown',
+      sunrise: '0:00',
+      sunset: '0:00',
+      oxygen: 0
     };
   }
 
@@ -33,6 +42,7 @@ export default class HomeScreen extends Component {
     RNShakeEvent.addEventListener('shake', () => {
       alert(2);
     });
+    Util.getLocation(this.getLocation);
   }
 
   componentWillUnmount () {
@@ -49,6 +59,34 @@ export default class HomeScreen extends Component {
 
   handleLocationPermission = () => {
     alert(1);
+  }
+
+  getLocation = (error, position) => {
+    if (error === null) {
+      let altitude = Math.round(position.coords.altitude);
+      if (__DEV__ && Util.isSimulator()) {
+        // Dharamshala
+        altitude = 1530;
+        position.coords.latitude = 32.219044;
+        position.coords.longitude = 76.323402;
+      }
+      let altitudeData = Util.getAltitudeData(altitude);
+      let sun = Util.getSunriseSunset(position.coords.latitude, position.coords.longitude);
+      this.setState({
+        altitude: altitude,
+        accuracy: position.coords.altitudeAccuracy,
+        lat: position.coords.latitude,
+        lon: position.coords.longitude,
+        level: altitudeData.level,
+        oxygen: altitudeData.oxygen,
+        sunrise: Util.formatTime(sun.sunrise),
+        sunset: Util.formatTime(sun.sunset)
+      }, () => {
+
+      });
+    } else {
+      console.log(error);
+    }
   }
 
   refreshControl = () => {
@@ -86,35 +124,36 @@ export default class HomeScreen extends Component {
             {/* Altitude */}
             <View style={styles.altitudeContainer}>
               <Altitude
-                altitude={8848}
-                accuracy={150}
-                level={'Low'}
+                altitude={this.state.altitude}
+                accuracy={this.state.accuracy}
+                level={this.state.level}
               />
             </View>
             {/* Sunrise & Sunset */}
             <View style={styles.sunriseSunsetContainer}>
               <Sunrise
-                time={'06:30'}
+                time={this.state.sunrise}
                 calculating={false}
               />
               <Sunset
-                time={'07:30'}
+                time={this.state.sunset}
                 calculating={false}
               />
             </View>
             {/* Coordinates */}
             <View style={styles.coordinatesContainer}>
               <Coordinates
-                lat={32.219042}
-                lon={76.323404}
-                location={'Ram Nagar, Dharamshala, 176215, Himachal Pradesh, India'}
+                handleOpenMap={this.handleOpenMap}
+                lat={this.state.lat}
+                lon={this.state.lon}
+                location={this.state.location}
                 fetching={false}
               />
             </View>
             {/* Oxygen & Share button */}
             <View style={styles.oxygenShareContainer}>
               <Oxygen
-                percentage={20}
+                percentage={this.state.oxygen}
               />
               <ShareButton
                 handleShare={() => { }}

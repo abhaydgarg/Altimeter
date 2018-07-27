@@ -18,6 +18,9 @@ export default StyleSheet.create({
     fontSize: Fonts.size.h3,
     color: Colors.white
   },
+  latLonMainContainer: {
+    flex: 1
+  },
   latLonContainer: {
     backgroundColor: layout ? Colors.layout.two : Colors.transparent,
     flex: 1,

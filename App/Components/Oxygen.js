@@ -2,31 +2,44 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import { isEmpty } from '@abhaydgarg/is';
 
 import { Images } from '../Themes';
 import styles from './Styles/OxygenStyles';
+import { validatePercentage } from './Validators/OxygenValidators';
 
 export default class Oxygen extends Component {
   static propTypes = {
     percentage: PropTypes.number
   };
 
-  static defaultProps = {
-    percentage: null
+  static getDerivedStateFromProps (props, state) {
+    return {
+      percentage: validatePercentage(props.percentage)
+    };
+  }
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      percentage: 0
+    };
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    if (this.state.percentage === nextState.percentage) {
+      return false;
+    }
+    return true;
   }
 
   formatPercentage = () => {
-    if (!isEmpty(this.props.percentage)) {
-      return `${this.props.percentage}%`;
+    if (this.state.percentage) {
+      return `${this.state.percentage}%`;
     }
-    return this.props.percentage;
+    return this.state.percentage;
   }
 
   render () {
-    let { percentage } = this.props;
-    percentage = this.formatPercentage();
-
     return (
       <View style={styles.container}>
         <View style={styles.imageContainer}>
@@ -45,7 +58,7 @@ export default class Oxygen extends Component {
           animation='fadeIn'
           style={styles.percentageContainer}
         >
-          <Text style={styles.percentage}>{percentage}</Text>
+          <Text style={styles.percentage}>{this.formatPercentage()}</Text>
         </Animatable.View>
       </View>
     );

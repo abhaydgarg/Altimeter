@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
 import formatNumber from 'simple-format-number';
 import * as Animatable from 'react-native-animatable';
-import { isNumber, isEmpty } from '@abhaydgarg/is';
 
 import Util from '../Lib/Util';
 import { Colors } from '../Themes';
 import styles from './Styles/AltitudeStyles';
+import { validateAltitude, validateAccuracy, validateLevel } from './Validators/AltitudeValidators';
 
 export default class Altitude extends Component {
   static propTypes = {
@@ -16,66 +16,58 @@ export default class Altitude extends Component {
     level: PropTypes.string
   };
 
-  static defaultProps = {
-    accuracy: 0,
-    level: null
+  static getDerivedStateFromProps (props, state) {
+    return {
+      altitude: validateAltitude(props.altitude),
+      accuracy: validateAccuracy(props.accuracy),
+      level: validateLevel(props.level)
+    };
   }
 
-  convertAltitude = (altitude) => {
-    altitude = altitude * 3.28;
-    return formatNumber(altitude, {
+  constructor (props) {
+    super(props);
+    this.state = {
+      altitude: 0,
+      accuracy: 0,
+      level: ''
+    };
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    if (this.state.altitude === nextState.altitude) {
+      return false;
+    }
+    return true;
+  }
+
+  convertAltitude = () => {
+    return formatNumber(this.state.altitude * 3.28, {
       fractionDigits: 0
     });
   }
 
-  validateAccuracy = () => {
-    if (!isNumber(this.props.accuracy)) {
-      return 0;
-    }
-    return this.props.accuracy;
-  }
-
-  validateAltitude = () => {
-    if (!isNumber(this.props.altitude)) {
-      return 0;
-    }
-    return this.props.altitude;
-  }
-
   setLevelBackgroundColor = () => {
-    let color = Util.getAltitudeLevelColor(this.props.level);
-    if (!isEmpty(color)) {
+    let color = Util.getAltitudeLevelColorIdentifier(this.state.level);
+    if (color) {
       return Colors.altitudeLevel[color];
     }
-    return Colors.white;
-  }
-
-  renderLevel = () => {
-    let { level } = this.props;
-    if (!isEmpty(level)) {
-      return (
-        <Text style={[styles.level, { backgroundColor: this.setLevelBackgroundColor() }]}>{level}</Text>
-      );
-    }
-    return null;
+    return Colors.transparent;
   }
 
   render () {
-    let { accuracy, altitude } = this.props;
-    accuracy = this.validateAccuracy();
-    altitude = this.validateAltitude();
-
     return (
       <View style={styles.container}>
-        {this.renderLevel()}
+        <Text style={[styles.level, { backgroundColor: this.setLevelBackgroundColor() }]}>
+          {this.state.level}
+        </Text>
         <Animatable.View
           useNativeDriver
           animation='zoomIn'
           easing='ease-in-out'
           style={styles.body}
         >
-          <Text style={styles.altitude}>{altitude}</Text>
-          <Text style={styles.altitudeUnit}>Metres</Text>
+          <Text style={styles.altitude}>{this.state.altitude}</Text>
+          <Text style={styles.altitudeUnit}>Meter</Text>
         </Animatable.View>
         <View style={styles.footer}>
           <Animatable.View
@@ -85,7 +77,7 @@ export default class Altitude extends Component {
             style={styles.accuracyContainer}
           >
             <Text style={styles.accuracyText}>Accuracy:</Text>
-            <Text style={styles.accuracy}>{accuracy}</Text>
+            <Text style={styles.accuracy}>{this.state.accuracy}</Text>
           </Animatable.View>
           <Animatable.View
             useNativeDriver
@@ -93,7 +85,7 @@ export default class Altitude extends Component {
             easing='ease-in-out'
             style={styles.feetContainer}
           >
-            <Text style={styles.feet}>{this.convertAltitude(altitude)}</Text>
+            <Text style={styles.feet}>{this.convertAltitude()}</Text>
             <Text style={styles.feetUnit}>ft</Text>
           </Animatable.View>
         </View>

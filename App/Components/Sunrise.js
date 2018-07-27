@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import { isEmpty } from '@abhaydgarg/is';
 
 import { Images } from '../Themes';
 import styles from './Styles/SunriseStyles';
+import { validateTime } from './Validators/SunriseValidators';
 
 export default class Sunrise extends Component {
   static propTypes = {
@@ -13,35 +13,43 @@ export default class Sunrise extends Component {
     calculating: PropTypes.bool
   };
 
-  static defaultProps = {
-    calculating: false
+  static getDerivedStateFromProps (props, state) {
+    return {
+      time: validateTime(props.time),
+      calculating: props.calculating
+    };
   }
 
-  validateTime = () => {
-    if (isEmpty(this.props.time)) {
-      return '0:00';
+  constructor (props) {
+    super(props);
+    this.state = {
+      time: '0:00',
+      calculating: false
+    };
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    if (this.state.time === nextState.time) {
+      return false;
     }
-    return this.props.time;
+    return true;
   }
 
   iterationCount = () => {
-    if (this.props.calculating === true) {
+    if (this.state.calculating === true) {
       return 'infinite';
     }
     return 1;
   }
 
   animation = () => {
-    if (this.props.calculating === true) {
+    if (this.state.calculating === true) {
       return 'swing';
     }
     return 'fadeIn';
   }
 
   render () {
-    let { time } = this.props;
-    time = this.validateTime();
-
     return (
       <View style={styles.container}>
         <View style={styles.imageContainer}>
@@ -61,7 +69,7 @@ export default class Sunrise extends Component {
             animation='fadeIn'
             style={styles.time}
           >
-            {time}
+            {this.state.time}
           </Animatable.Text>
         </View>
       </View>

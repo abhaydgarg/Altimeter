@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import { isNumber } from '@abhaydgarg/is';
 import Icon from 'react-native-vector-icons/Ionicons';
+import openMap from 'react-native-open-maps';
 
 import styles from './Styles/CoordinatesStyles';
+import { validateLat, validateLon, validateLocation } from './Validators/CoordinatesValidators';
 
 const AnimatedIcon = Animatable.createAnimatableComponent(Icon);
 
@@ -17,43 +18,56 @@ export default class Coordinates extends Component {
     fetching: PropTypes.bool
   };
 
-  static defaultProps = {
-    location: 'Unknown'
+  static getDerivedStateFromProps (props, state) {
+    return {
+      lat: validateLat(props.lat),
+      lon: validateLon(props.lon),
+      location: validateLocation(props.location),
+      fetching: props.fetching
+    };
   }
 
-  validateLat = () => {
-    if (!isNumber(this.props.lat)) {
-      return 0;
-    }
-    return this.props.lat;
+  constructor (props) {
+    super(props);
+    this.state = {
+      lat: 0,
+      lon: 0,
+      location: 'Unknown',
+      fetching: false
+    };
   }
 
-  validateLon = () => {
-    if (!isNumber(this.props.lon)) {
-      return 0;
+  shouldComponentUpdate (nextProps, nextState) {
+    if (this.state.lat === nextState.lat && this.state.lon === nextState.lon) {
+      return false;
     }
-    return this.props.lon;
+    return true;
+  }
+
+  openMap = () => {
+    if (this.state.lat !== 0 && this.state.lon !== 0) {
+      openMap({
+        latitude: this.state.lat,
+        longitude: this.state.lon
+      });
+    }
   }
 
   iterationCount = () => {
-    if (this.props.fetching === true) {
+    if (this.state.fetching === true) {
       return 'infinite';
     }
     return 1;
   }
 
   animation = () => {
-    if (this.props.fetching === true) {
+    if (this.state.fetching === true) {
       return 'rotate';
     }
     return 'fadeIn';
   }
 
   render () {
-    let { lat, lon, location } = this.props;
-    lat = this.validateLat();
-    lon = this.validateLon();
-
     return (
       <View style={styles.container}>
         <View style={styles.iconContainer}>
@@ -65,16 +79,21 @@ export default class Coordinates extends Component {
             style={styles.icon}
           />
         </View>
-        <Animatable.View
-          useNativeDriver
-          animation='fadeIn'
-          easing='ease-in-out'
-          style={styles.latLonContainer}
+        <TouchableOpacity
+          style={styles.latLonMainContainer}
+          onPress={this.openMap}
         >
-          <Text style={styles.lat}>{lat}</Text>
-          <Text style={styles.separator}>/</Text>
-          <Text style={styles.lon}>{lon}</Text>
-        </Animatable.View>
+          <Animatable.View
+            useNativeDriver
+            animation='fadeIn'
+            easing='ease-in-out'
+            style={styles.latLonContainer}
+          >
+            <Text style={styles.lat}>{this.state.lat}</Text>
+            <Text style={styles.separator}>/</Text>
+            <Text style={styles.lon}>{this.state.lon}</Text>
+          </Animatable.View>
+        </TouchableOpacity>
         <Animatable.View
           useNativeDriver
           animation='fadeIn'
@@ -85,7 +104,7 @@ export default class Coordinates extends Component {
             numberOfLines={2}
             style={styles.location}
           >
-            {location}
+            {this.state.location}
           </Text>
         </Animatable.View>
       </View>

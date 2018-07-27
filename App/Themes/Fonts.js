@@ -1,14 +1,11 @@
 import normalize from '../Lib/normalizeText';
 
 const type = {
-  audiowide: 'Audiowide-Regular',
   iceberg: 'Iceberg-Regular',
   iceland: 'Iceland-Regular',
-  thin: 'Roboto-Thin',
-  light: 'Roboto-Light',
-  regular: 'Roboto-Regular',
-  medium: 'Roboto-Medium',
-  bold: 'Roboto-Bold'
+  regular: 'Ubuntu-Regular',
+  medium: 'Ubuntu-Medium',
+  bold: 'Ubuntu-Bold'
 };
 
 const size = {

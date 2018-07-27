@@ -7235,13 +7235,13 @@ react-native-linear-gradient@^2.4.0:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-open-maps@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-open-maps/-/react-native-open-maps-0.2.2.tgz#e21c143b6c0a8ba17403f9646523d95cf13c5cbf"
+
 react-native-permissions@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-1.1.1.tgz#4876004681ff8556454613d85249b01baff9b35b"
-
-react-native-pull-to-refresh@^2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/react-native-pull-to-refresh/-/react-native-pull-to-refresh-2.1.3.tgz#66a02c024dc471372a80511f1f180c0bb2646819"
 
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"
@@ -7780,12 +7780,6 @@ ret@~0.1.10:
   version "0.1.15"
   resolved "https://registry.yarnpkg.com/ret/-/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
 
-reverse-geocoding@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/reverse-geocoding/-/reverse-geocoding-3.0.1.tgz#f8189d47adeb29dea82524a3e615c39d15af6a28"
-  dependencies:
-    request "^2.83.0"
-
 right-align@^0.1.1:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/right-align/-/right-align-0.1.3.tgz#61339b722fe6a3515689210d24e14c96148613ef"
@@ -8111,10 +8105,6 @@ sockjs-client@1.1.4:
     json3 "^3.3.2"
     url-parse "^1.1.8"
 
-solar-calc@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/solar-calc/-/solar-calc-1.1.0.tgz#8fd27e05bed92329fd8a4a3f9a185a646e403fc7"
-
 sort-keys@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/sort-keys/-/sort-keys-1.1.2.tgz#441b6d4d346798f1b4e49e8920adfba0e543f9ad"
@@ -8367,6 +8357,10 @@ style-loader@^0.20.3:
   dependencies:
     loader-utils "^1.1.0"
     schema-utils "^0.4.5"
+
+suncalc@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/suncalc/-/suncalc-1.8.0.tgz#1d9898109563078750f4994a959e654d876acbf5"
 
 supports-color@^2.0.0:
   version "2.0.0"

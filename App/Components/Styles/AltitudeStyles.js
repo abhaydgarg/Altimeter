@@ -59,9 +59,9 @@ export default StyleSheet.create({
   },
   level: {
     fontFamily: Fonts.type.iceberg,
-    fontSize: Fonts.size.regular,
+    fontSize: Fonts.size.medium,
     color: Colors.black,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.transparent,
     padding: 2,
     position: 'absolute',
     top: 0,
