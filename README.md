@@ -13,7 +13,8 @@ GPS altimeter by using React Native
 * Gives current location address, if device is connected to internet.
 * Gives approximate percentage of oxygen based on [Altitude Chart](http://www.higherpeak.com/altitudechart.html)
 * Share option.
-* **SHAKE** device or **PULL** screen down to recieve updated location from GPS. App does not listen to location change. Refresh to recieve updated location.
+* Open location in Google Map or Apple Map when tap on location's coordinates.
+* **SHAKE** device or **PULL** screen down to receive updated location from GPS. App does not listen to location change. Refresh to receive updated location.
 
 ## Installation
 
