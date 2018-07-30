@@ -11,6 +11,7 @@ const CoordinatesStory = () => {
         lon={76.323404}
         location={'Ram Nagar, Dharamshala, 176215, Himachal Pradesh, India'}
         fetching={false}
+        receiving={false}
       />
     </View>
   );

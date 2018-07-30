@@ -9,7 +9,7 @@ const SunsetStory = () => {
     <View style={styles.container}>
       <Sunset
         time={'07:30'}
-        calculating={false}
+        receiving={false}
       />
     </View>
   );

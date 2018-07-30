@@ -11,6 +11,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  activityIndicator: {
+    marginBottom: 10
+  },
   altitude: {
     fontFamily: Fonts.type.iceberg,
     fontSize: Fonts.size.h1,

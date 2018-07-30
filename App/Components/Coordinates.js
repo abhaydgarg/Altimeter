@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Platform } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons';
 import openMap from 'react-native-open-maps';
+import { AppInstalledChecker } from 'react-native-check-app-install';
 
+import Util from '../Lib/Util';
 import styles from './Styles/CoordinatesStyles';
 import { validateLat, validateLon, validateLocation } from './Validators/CoordinatesValidators';
 
@@ -15,7 +17,8 @@ export default class Coordinates extends Component {
     lat: PropTypes.number.isRequired,
     lon: PropTypes.number.isRequired,
     location: PropTypes.string,
-    fetching: PropTypes.bool
+    fetching: PropTypes.bool,
+    receiving: PropTypes.bool
   };
 
   static getDerivedStateFromProps (props, state) {
@@ -23,7 +26,8 @@ export default class Coordinates extends Component {
       lat: validateLat(props.lat),
       lon: validateLon(props.lon),
       location: validateLocation(props.location),
-      fetching: props.fetching
+      fetching: props.fetching,
+      receiving: props.receiving
     };
   }
 
@@ -32,49 +36,45 @@ export default class Coordinates extends Component {
     this.state = {
       lat: 0,
       lon: 0,
-      location: 'Unknown',
-      fetching: false
+      location: '',
+      fetching: false,
+      receiving: false
     };
-  }
-
-  shouldComponentUpdate (nextProps, nextState) {
-    if (this.state.lat === nextState.lat && this.state.lon === nextState.lon) {
-      return false;
-    }
-    return true;
   }
 
   openMap = () => {
     if (this.state.lat !== 0 && this.state.lon !== 0) {
-      openMap({
-        latitude: this.state.lat,
-        longitude: this.state.lon
+      AppInstalledChecker.isAppInstalled('google maps').then(isInstalled => {
+        let provider = 'google';
+        if (isInstalled === false && Platform.OS === 'ios') {
+          provider = 'apple';
+        }
+        return provider;
+      }).then(provider => {
+        openMap({
+          provider: provider,
+          latitude: this.state.lat,
+          longitude: this.state.lon
+        });
+      }).catch(error => {
+        Util.handleOpenMapError(error);
       });
     }
   }
 
-  iterationCount = () => {
-    if (this.state.fetching === true) {
-      return 'infinite';
-    }
-    return 1;
-  }
-
-  animation = () => {
-    if (this.state.fetching === true) {
-      return 'rotate';
-    }
-    return 'fadeIn';
-  }
-
   render () {
     return (
-      <View style={styles.container}>
+      <Animatable.View
+        useNativeDriver
+        animation='fadeIn'
+        easing='ease-in-out'
+        style={styles.container}
+      >
         <View style={styles.iconContainer}>
           <AnimatedIcon
             easing='ease-in-out'
-            animation={this.animation()}
-            iterationCount={this.iterationCount()}
+            animation={this.state.fetching ? 'rotate' : 'fadeIn'}
+            iterationCount={this.state.fetching ? 'infinite' : 1}
             name='ios-locate-outline'
             style={styles.icon}
           />
@@ -85,7 +85,7 @@ export default class Coordinates extends Component {
         >
           <Animatable.View
             useNativeDriver
-            animation='fadeIn'
+            animation={this.state.receiving ? undefined : 'fadeIn'}
             easing='ease-in-out'
             style={styles.latLonContainer}
           >
@@ -94,20 +94,18 @@ export default class Coordinates extends Component {
             <Text style={styles.lon}>{this.state.lon}</Text>
           </Animatable.View>
         </TouchableOpacity>
-        <Animatable.View
-          useNativeDriver
-          animation='fadeIn'
-          easing='ease-in-out'
+        <View
           style={styles.locationContainer}
         >
-          <Text
-            numberOfLines={2}
+          <Animatable.Text
+            animation={this.state.fetching ? undefined : 'fadeIn'}
+            easing='ease-in-out'
             style={styles.location}
           >
             {this.state.location}
-          </Text>
-        </Animatable.View>
-      </View>
+          </Animatable.Text>
+        </View>
+      </Animatable.View>
     );
   }
 }

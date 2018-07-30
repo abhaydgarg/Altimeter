@@ -8,6 +8,7 @@
     "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force",
     "newclear": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build && rm -rf node_modules/ && npm cache clean --force && npm i",
     "ios": "react-native run-ios --simulator=\"iPhone X\"",
+    "ios:se": "react-native run-ios --simulator=\"iPhone SE\"",
     "android": "react-native run-android",
     "debug": "react-devtools",
     "test": "jest",
@@ -20,15 +21,19 @@
   },
   "dependencies": {
     "@abhaydgarg/is": "^1.0.0",
+    "geodist": "^0.2.1",
     "prop-types": "^15.6.2",
     "react": "16.4.1",
     "react-native": "0.56.0",
     "react-native-animatable": "^1.3.0",
+    "react-native-check-app-install": "^0.0.4",
     "react-native-device-info": "^0.21.5",
     "react-native-linear-gradient": "^2.4.0",
+    "react-native-messages": "^0.2.4",
     "react-native-open-maps": "^0.2.2",
     "react-native-permissions": "^1.1.1",
     "react-native-shake-event": "^4.0.1",
+    "react-native-share": "^1.1.0",
     "react-native-status-bar-height": "^2.0.0",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.4.1",
@@ -62,7 +67,8 @@
     "parser": "babel-eslint",
     "globals": [
       "__DEV__",
-      "alert"
+      "alert",
+      "fetch"
     ]
   },
   "repository": {

@@ -8,7 +8,10 @@ YellowBox.ignoreWarnings([
   'Warning: isMounted(...) is deprecated',
   'Module RCTImageLoader',
   'Remote debugger is in a background',
-  'Module RNShakeEvent'
+  'Module RNShakeEvent',
+  'Module RNShare',
+  'Class',
+  'Required dispatch_sync'
 ]);
 
 AppRegistry.registerComponent(appName, () => App);

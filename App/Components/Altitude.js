@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View } from 'react-native';
+import { Text, View, ActivityIndicator } from 'react-native';
 import formatNumber from 'simple-format-number';
 import * as Animatable from 'react-native-animatable';
 
@@ -13,14 +13,18 @@ export default class Altitude extends Component {
   static propTypes = {
     altitude: PropTypes.number.isRequired,
     accuracy: PropTypes.number,
-    level: PropTypes.string
+    level: PropTypes.string,
+    receiving: PropTypes.bool,
+    refreshing: PropTypes.bool
   };
 
   static getDerivedStateFromProps (props, state) {
     return {
       altitude: validateAltitude(props.altitude),
       accuracy: validateAccuracy(props.accuracy),
-      level: validateLevel(props.level)
+      level: validateLevel(props.level),
+      receiving: props.receiving,
+      refreshing: props.refreshing
     };
   }
 
@@ -29,15 +33,10 @@ export default class Altitude extends Component {
     this.state = {
       altitude: 0,
       accuracy: 0,
-      level: ''
+      level: '',
+      receiving: false,
+      refreshing: false
     };
-  }
-
-  shouldComponentUpdate (nextProps, nextState) {
-    if (this.state.altitude === nextState.altitude) {
-      return false;
-    }
-    return true;
   }
 
   convertAltitude = () => {
@@ -54,42 +53,69 @@ export default class Altitude extends Component {
     return Colors.transparent;
   }
 
+  renderAltitude = () => {
+    if (this.state.receiving === true && this.state.refreshing === false) {
+      return (
+        <ActivityIndicator
+          size='small'
+          color={Colors.white}
+          style={styles.activityIndicator}
+        />
+      );
+    }
+    return (
+      <Animatable.Text
+        easing='ease-in-out'
+        animation={this.state.receiving ? undefined : 'fadeIn'}
+        style={styles.altitude}
+      >
+        {this.state.altitude}
+      </Animatable.Text>
+    );
+  }
+
   render () {
     return (
-      <View style={styles.container}>
-        <Text style={[styles.level, { backgroundColor: this.setLevelBackgroundColor() }]}>
-          {this.state.level}
-        </Text>
-        <Animatable.View
-          useNativeDriver
-          animation='zoomIn'
+      <Animatable.View
+        useNativeDriver
+        animation='fadeIn'
+        easing='ease-in-out'
+        style={styles.container}
+      >
+        <Animatable.Text
           easing='ease-in-out'
-          style={styles.body}
+          animation={this.state.receiving ? undefined : 'fadeIn'}
+          style={[styles.level, { backgroundColor: this.setLevelBackgroundColor() }]}
         >
-          <Text style={styles.altitude}>{this.state.altitude}</Text>
+          {this.state.level}
+        </Animatable.Text>
+        <View style={styles.body}>
+          {this.renderAltitude()}
           <Text style={styles.altitudeUnit}>Meter</Text>
-        </Animatable.View>
-        <View style={styles.footer}>
-          <Animatable.View
-            useNativeDriver
-            animation='fadeIn'
-            easing='ease-in-out'
-            style={styles.accuracyContainer}
-          >
-            <Text style={styles.accuracyText}>Accuracy:</Text>
-            <Text style={styles.accuracy}>{this.state.accuracy}</Text>
-          </Animatable.View>
-          <Animatable.View
-            useNativeDriver
-            animation='fadeIn'
-            easing='ease-in-out'
-            style={styles.feetContainer}
-          >
-            <Text style={styles.feet}>{this.convertAltitude()}</Text>
-            <Text style={styles.feetUnit}>ft</Text>
-          </Animatable.View>
         </View>
-      </View>
+        <View style={styles.footer}>
+          <View style={styles.accuracyContainer}>
+            <Text style={styles.accuracyText}>Accuracy:</Text>
+            <Animatable.Text
+              easing='ease-in-out'
+              animation={this.state.receiving ? undefined : 'fadeIn'}
+              style={styles.accuracy}
+            >
+              {this.state.accuracy}
+            </Animatable.Text>
+          </View>
+          <View style={styles.feetContainer}>
+            <Animatable.Text
+              easing='ease-in-out'
+              animation={this.state.receiving ? undefined : 'fadeIn'}
+              style={styles.feet}
+            >
+              {this.convertAltitude()}
+            </Animatable.Text>
+            <Text style={styles.feetUnit}>ft</Text>
+          </View>
+        </View>
+      </Animatable.View>
     );
   }
 }

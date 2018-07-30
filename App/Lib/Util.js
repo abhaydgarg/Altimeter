@@ -1,5 +1,8 @@
 import DeviceInfo from 'react-native-device-info';
 import SunCalc from 'suncalc';
+import { showMessage } from 'react-native-messages';
+import { isDate } from '@abhaydgarg/is';
+import geodist from 'geodist';
 
 import Config from '../Config';
 import altitudes from '../Data/altitudes';
@@ -18,6 +21,10 @@ export default class Util {
 
   static formatTime (date) {
     return `${date.getHours()}:${date.getMinutes()}`;
+  }
+
+  static getDistance (lat1, lon1, lat2, lon2) {
+    return geodist({ lat: lat1, lon: lon1 }, { lat: lat2, lon: lon2 }, { unit: 'meters', exact: true });
   }
 
   static getAltitudeLevelColorIdentifier (level) {
@@ -64,7 +71,17 @@ export default class Util {
 
   static getLocation (cb) {
     navigator.geolocation.getCurrentPosition(function (position) {
-      cb(null, position);
+      if (__DEV__ && Util.isSimulator()) {
+        // Dharamshala
+        position.coords.altitude = 1530;
+        position.coords.latitude = 32.219044;
+        position.coords.longitude = 76.323402;
+      }
+      // setTimeout to view animation
+      setTimeout(() => {
+        // cb(new Error('GPS error'));
+        cb(null, position);
+      }, 1500);
     }, function (error) {
       cb(error);
     }, Config.locationOptions);
@@ -73,8 +90,61 @@ export default class Util {
   static getSunriseSunset (lat, lon) {
     let times = SunCalc.getTimes(new Date(), lat, lon);
     return {
-      sunrise: times.sunrise,
-      sunset: times.sunset
+      sunrise: isDate(times.sunrise) ? Util.formatTime(times.sunrise) : null,
+      sunset: isDate(times.sunset) ? Util.formatTime(times.sunset) : null,
     };
+  }
+
+  static getGeocodingErrorMessage (message) {
+    let error = 'Unknown location';
+    if (__DEV__) {
+      showMessage(message, {
+        duration: 15000
+      });
+    }
+    if (message === 'Network request failed') {
+      error = 'No internet connection';
+    }
+    return error;
+  }
+
+  static handleLocationError (error) {
+    let message = 'Unable to get GPS location';
+    if (__DEV__) {
+      message = error.message;
+    }
+    showMessage(message, {
+      duration: 15000
+    });
+  }
+
+  static handleCheckLocationPermissionError (error) {
+    let message = 'Unable to detrmine location permission\'s status';
+    if (__DEV__) {
+      message = error.message;
+    }
+    showMessage(message, {
+      duration: 15000
+    });
+  }
+
+  static handleRequestLocationPermissionError (error) {
+    let message = 'Unable to request location permission';
+    if (__DEV__) {
+      message = error.message;
+    }
+    showMessage(message, {
+      duration: 15000
+    });
+  }
+
+  static handleOpenMapError (error) {
+    let message = 'Unable to open in map';
+    if (__DEV__) {
+      message = error.message;
+    }
+    showMessage(message, {
+      duration: 15000
+    });
   }
 }

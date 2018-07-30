@@ -16,7 +16,7 @@ export function validateLon (lon) {
 
 export function validateLocation (location) {
   if (isEmpty(location)) {
-    return 'Unknown';
+    return null;
   }
   return location;
 }

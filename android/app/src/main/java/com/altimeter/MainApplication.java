@@ -3,6 +3,8 @@ package com.altimeter;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rpt.reactnativecheckpackageinstallation.CheckPackageInstallationPackage;
+import cl.json.RNSharePackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.jadsonlourenco.RNShakeEvent.RNShakeEventPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -27,6 +29,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new CheckPackageInstallationPackage(),
+            new RNSharePackage(),
             new VectorIconsPackage(),
             new RNShakeEventPackage(),
             new LinearGradientPackage(),

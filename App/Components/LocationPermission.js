@@ -26,7 +26,7 @@ export default class LocationPermission extends Component {
             name='ios-navigate'
             style={styles.icon}
           />
-          <Text style={styles.description}>Altimeter requires to access device's location.</Text>
+          <Text style={styles.description}>Altimeter needs to access device's location.</Text>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.button}

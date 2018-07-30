@@ -13,6 +13,8 @@ const AltitudeStory = () => {
         altitude={8000}
         accuracy={100}
         level={data.level}
+        receiving={false}
+        refreshing={false}
       />
     </View>
   );

@@ -12,6 +12,7 @@ const OxygenStory = () => {
     <View style={styles.container}>
       <Oxygen
         percentage={data.oxygen}
+        receiving={false}
       />
     </View>
   );

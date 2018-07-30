@@ -9,27 +9,23 @@ import { validatePercentage } from './Validators/OxygenValidators';
 
 export default class Oxygen extends Component {
   static propTypes = {
-    percentage: PropTypes.number
+    percentage: PropTypes.number,
+    receiving: PropTypes.bool,
   };
 
   static getDerivedStateFromProps (props, state) {
     return {
-      percentage: validatePercentage(props.percentage)
+      percentage: validatePercentage(props.percentage),
+      receiving: props.receiving
     };
   }
 
   constructor (props) {
     super(props);
     this.state = {
-      percentage: 0
+      percentage: 0,
+      receiving: false
     };
-  }
-
-  shouldComponentUpdate (nextProps, nextState) {
-    if (this.state.percentage === nextState.percentage) {
-      return false;
-    }
-    return true;
   }
 
   formatPercentage = () => {
@@ -41,12 +37,18 @@ export default class Oxygen extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
+      <Animatable.View
+        useNativeDriver
+        animation='fadeIn'
+        easing='ease-in-out'
+        style={styles.container}
+      >
         <View style={styles.imageContainer}>
           <Animatable.Image
             useNativeDriver
             easing='ease-in-out'
-            animation='fadeIn'
+            animation={this.state.receiving ? 'swing' : 'fadeIn'}
+            iterationCount={this.state.receiving ? 'infinite' : 1}
             style={styles.image}
             resizeMode='contain'
             source={Images.oxygen}
@@ -55,12 +57,12 @@ export default class Oxygen extends Component {
         <Animatable.View
           useNativeDriver
           easing='ease-in-out'
-          animation='fadeIn'
+          animation={this.state.receiving ? undefined : 'fadeIn'}
           style={styles.percentageContainer}
         >
           <Text style={styles.percentage}>{this.formatPercentage()}</Text>
         </Animatable.View>
-      </View>
+      </Animatable.View>
     );
   }
 }

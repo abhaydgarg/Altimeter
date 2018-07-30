@@ -53,6 +53,7 @@ export default StyleSheet.create({
     fontFamily: Fonts.type.regular,
     fontSize: Fonts.size.medium,
     color: Colors.white,
+    paddingHorizontal: 2,
     textAlign: 'center'
   }
 });
