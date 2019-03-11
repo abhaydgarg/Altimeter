@@ -74,8 +74,8 @@ export default class Util {
       if (__DEV__ && Util.isSimulator()) {
         // Dharamshala
         position.coords.altitude = 1530;
-        position.coords.latitude = 32.2190441111111111;
-        position.coords.longitude = 76.323402111111111;
+        position.coords.latitude = 32.219044;
+        position.coords.longitude = 76.323402;
       }
       // setTimeout to view animation
       setTimeout(() => {
