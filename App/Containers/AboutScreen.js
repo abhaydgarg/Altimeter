@@ -5,7 +5,6 @@ import { Colors } from '../Themes';
 import About from '../Components/About';
 
 export default class AboutScreen extends Component {
-
   static navigationOptions = () => {
     return {
       headerStyle: {

@@ -1,6 +1,7 @@
 const Config = {
   locationOptions: {
     enableHighAccuracy: true,
+    maximumAge: 0,
     timeout: 30000
   },
   locationiq: {

@@ -10,7 +10,7 @@ import { validatePercentage } from './Validators/OxygenValidators';
 export default class Oxygen extends Component {
   static propTypes = {
     percentage: PropTypes.number,
-    receiving: PropTypes.bool,
+    receiving: PropTypes.bool
   };
 
   static getDerivedStateFromProps (props, state) {

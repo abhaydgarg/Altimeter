@@ -89,9 +89,9 @@ export default class Coordinates extends Component {
             easing='ease-in-out'
             style={styles.latLonContainer}
           >
-            <Text style={styles.lat}>{this.state.lat}</Text>
+            <Text style={styles.lat}>{this.state.lat.toFixed(6)}</Text>
             <Text style={styles.separator}>/</Text>
-            <Text style={styles.lon}>{this.state.lon}</Text>
+            <Text style={styles.lon}>{this.state.lon.toFixed(6)}</Text>
           </Animatable.View>
         </TouchableOpacity>
         <View

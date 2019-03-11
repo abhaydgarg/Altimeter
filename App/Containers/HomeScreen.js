@@ -11,7 +11,6 @@ import Util from '../Lib/Util';
 import Geocoding from '../Lib/Geocoding';
 import { Colors } from '../Themes';
 import styles from './Styles/HomeScreenStyles';
-import ScreenActivityIndicator from '../Components/Global/ScreenActivityIndicator';
 import LocationPermission from '../Components/LocationPermission';
 import Altitude from '../Components/Altitude';
 import Sunrise from '../Components/Sunrise';
@@ -70,9 +69,9 @@ export default class HomeScreen extends Component {
         `LEVEL: ${this.state.level}`,
         `LATITUDE: ${this.state.lat}`,
         `LONGITUDE: ${this.state.lon}`,
-        `LOCATION: ${this.state.location}`,
+        `LOCATION: ${this.state.location}`
       ].join(`\n`)
-    }).then((res) => { }).catch((error) => { });
+    }).then((res) => { }).catch((error) => { console.error(error); });
   }
 
   handleAppStateChange = () => {
@@ -153,7 +152,7 @@ export default class HomeScreen extends Component {
           sunrise: sun.sunrise,
           sunset: sun.sunset,
           refreshing: false,
-          receiving: false,
+          receiving: false
         }, () => {
           // Do not fetch location if distance is less than 100 meteres
           if (distance > 100) {
