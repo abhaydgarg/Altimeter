@@ -1,20 +1,20 @@
 # Altimeter
 
-GPS altimeter by using React Native
+GPS altimeter by using React native
 
 ## Features
 
 * No ads.
 * Works without internet connection.
-* Beautiful black and white interface.
-* Gives altitude height in meters and feet.
-* Gives level of altitude.
-* Gives sunrise and sunset time.
-* Gives current location address, if device is connected to internet.
-* Gives approximate percentage of oxygen based on [Altitude Chart](http://www.higherpeak.com/altitudechart.html)
-* Share option.
-* Open location in Google Map or Apple Map when tap on location's coordinates.
-* **SHAKE** device or **PULL** screen down to receive updated location from GPS. App does not listen to location change. Refresh to receive updated location.
+* Altitude in meters and feet.
+* Level of altitude (Low, Medium, High, Very High, Extreme, Ultra).
+* Sunrise and sunset time.
+* Current location address, if device is connected to internet.
+* Approximate percentage of oxygen based on [Altitude Chart](http://www.higherpeak.com/altitudechart.html)
+* Share button.
+* Open current location in either Google Map or Apple Map when tap on coordinates.
+* Manual refresh only. Deliberately not implemented the auto refresh feature.
+* **SHAKE** device or **PULL** screen down to refresh.
 
 ## Installation
 
