@@ -4,7 +4,6 @@ import { storiesOf } from '@storybook/react-native';
 
 import ScreenActivityIndicatorStory from './ScreenActivityIndicator.story';
 import ScreenMessageStory from './ScreenMessage.story';
-import MessageStory from './Message.story';
 
 storiesOf('Global', module)
   .add('Screen Activity Indicator', () =>
@@ -17,9 +16,6 @@ storiesOf('Global', module)
       <ScreenMessageStory />
     </View>
   )
-  .add('Message', () =>
-    <MessageStory />
-  );
 
 const styles = {
   container: {

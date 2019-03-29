@@ -1,6 +1,6 @@
 {
   "name": "Altimeter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "GPS altimeter by using React Native",
   "private": true,
   "scripts": {
@@ -29,9 +29,9 @@
     "react-native-check-app-install": "^0.0.4",
     "react-native-device-info": "^0.21.5",
     "react-native-linear-gradient": "^2.4.0",
-    "react-native-messages": "^0.2.4",
     "react-native-open-maps": "^0.2.2",
     "react-native-permissions": "^1.1.1",
+    "react-native-root-toast": "^3.0.2",
     "react-native-shake-event": "^4.0.1",
     "react-native-share": "^1.1.0",
     "react-native-status-bar-height": "^2.0.0",

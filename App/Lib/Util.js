@@ -1,6 +1,6 @@
 import DeviceInfo from 'react-native-device-info';
 import SunCalc from 'suncalc';
-import { showMessage } from 'react-native-messages';
+import Toast from 'react-native-root-toast';
 import { isDate } from '@abhaydgarg/is';
 import geodist from 'geodist';
 
@@ -98,9 +98,7 @@ export default class Util {
   static getGeocodingErrorMessage (message) {
     let error = 'Unknown location';
     if (__DEV__) {
-      showMessage(message, {
-        duration: 15000
-      });
+      Toast.show(message, Config.toast);
     }
     if (message === 'Network request failed') {
       error = 'No internet connection';
@@ -113,9 +111,7 @@ export default class Util {
     if (__DEV__) {
       message = error.message;
     }
-    showMessage(message, {
-      duration: 15000
-    });
+    Toast.show(message, Config.toast);
   }
 
   static handleCheckLocationPermissionError (error) {
@@ -123,9 +119,7 @@ export default class Util {
     if (__DEV__) {
       message = error.message;
     }
-    showMessage(message, {
-      duration: 15000
-    });
+    Toast.show(message, Config.toast);
   }
 
   static handleRequestLocationPermissionError (error) {
@@ -133,9 +127,7 @@ export default class Util {
     if (__DEV__) {
       message = error.message;
     }
-    showMessage(message, {
-      duration: 15000
-    });
+    Toast.show(message, Config.toast);
   }
 
   static handleOpenMapError (error) {
@@ -143,8 +135,6 @@ export default class Util {
     if (__DEV__) {
       message = error.message;
     }
-    showMessage(message, {
-      duration: 15000
-    });
+    Toast.show(message, Config.toast);
   }
 }
